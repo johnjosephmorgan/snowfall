@@ -87,7 +87,7 @@ def main():
     print("Parts we will prepare: ", dataset_parts)
 
     corpus_dir = locate_corpus(
-        Path('/export/corpora5/LibriSpeech'),
+        Path('/mnt/corpora/librispeech/LibriSpeech'),
         Path('/home/storage04/zhuangweiji/data/open-source-data/librispeech/LibriSpeech'),
         Path('/root/fangjun/data/librispeech/LibriSpeech'),
         Path('/export/common/data/corpora/ASR/openslr/SLR12/LibriSpeech')
