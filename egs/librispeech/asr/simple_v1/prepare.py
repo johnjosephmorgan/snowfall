@@ -93,7 +93,7 @@ def main():
         Path('/export/common/data/corpora/ASR/openslr/SLR12/LibriSpeech')
     )
     musan_dir = locate_corpus(
-        Path('/export/corpora5/JHU/musan'),
+        Path('/mnt/corpora/musan'),
         Path('/export/common/data/corpora/MUSAN/musan'),
         Path('/root/fangjun/data/musan'),
     )
