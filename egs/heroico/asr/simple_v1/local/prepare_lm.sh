@@ -7,6 +7,7 @@ set -e
 stage=0
 
 . ./local/parse_options.sh
+. ./path.sh
 
 if [ ! -d data/local/lm ]; then
     mkdir -p data/local/lm
