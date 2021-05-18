@@ -64,7 +64,7 @@ if [ $stage -le 6 ]; then
     --read-symbol-table="data/lang/words.txt" \
     --disambig-symbol='#0' \
     --max-order=1 \
-    data/local/lm/lm.arpa >data/lang_nosp/G_uni.fst.txt
+    data/local/lm/trigram.arpa >data/lang/G_uni.fst.txt
 
   python3 -m kaldilm \
     --read-symbol-table="data/lang_nosp/words.txt" \
