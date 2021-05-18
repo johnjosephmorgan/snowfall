@@ -40,10 +40,10 @@ fi
 if [ $stage -le 3 ]; then
   local/prepare_lang.sh \
     --position-dependent-phones false \
-    data/local/dict_nosp \
+    data/local/dict \
     "<UNK>" \
-    data/local/lang_tmp_nosp \
-    data/lang_nosp
+    data/local/lang_tmp \
+    data/lang
 
   echo "To load L:"
   echo "    Lfst = k2.Fsa.from_openfst(<string of data/lang_nosp/L.fst.txt>, acceptor=False)"
