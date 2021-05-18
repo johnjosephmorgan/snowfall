@@ -33,11 +33,20 @@ if [ $stage -le 1 ]; then
 fi
 
 if [ $stage -le 2 ]; then
+  mkdir -p $tmpdir/subs/lm
+  local/subs_prepare_data.pl
+fi
+
+if [ $stage -le 3 ]; then
+  local/prepare_lm.sh  $tmpdir/subs/lm/in_vocabulary.txt
+fi
+
+if [ $stage -le 4 ]; then
   local/prepare_dict.sh
   #local/prepare_dict.sh data/local/lm data/local/dict_nosp
 fi
 
-if [ $stage -le 3 ]; then
+if [ $stage -le 5 ]; then
   local/prepare_lang.sh \
     --position-dependent-phones false \
     data/local/dict \
@@ -49,13 +58,13 @@ if [ $stage -le 3 ]; then
   echo "    Lfst = k2.Fsa.from_openfst(<string of data/lang_nosp/L.fst.txt>, acceptor=False)"
 fi
 
-if [ $stage -le 4 ]; then
+if [ $stage -le 6 ]; then
   # Build G
-  python3 -m kaldilm \
-    --read-symbol-table="data/lang_nosp/words.txt" \
+  python -m kaldilm \
+    --read-symbol-table="data/lang/words.txt" \
     --disambig-symbol='#0' \
     --max-order=1 \
-    data/local/lm/lm_tgmed.arpa >data/lang_nosp/G_uni.fst.txt
+    data/local/lm/lm.arpa >data/lang_nosp/G_uni.fst.txt
 
   python3 -m kaldilm \
     --read-symbol-table="data/lang_nosp/words.txt" \
@@ -77,11 +86,11 @@ if [ $stage -le 4 ]; then
   echo ""
 fi
 
-if [ $stage -le 5 ]; then
+if [ $stage -le 7 ]; then
   python3 ./prepare.py
 fi
 
-if [ $stage -le 6 ]; then
+if [ $stage -le 8 ]; then
   # python3 ./train.py # ctc training
   # python3 ./mmi_bigram_train.py # ctc training + bigram phone LM
   #  python3 ./mmi_mbr_train.py
@@ -92,7 +101,7 @@ if [ $stage -le 6 ]; then
   python3 -m torch.distributed.launch --nproc_per_node=$ngpus ./mmi_bigram_train.py --world_size $ngpus
 fi
 
-if [ $stage -le 7 ]; then
+if [ $stage -le 9 ]; then
   # python3 ./decode.py # ctc decoding
   python3 ./mmi_bigram_decode.py --epoch 9
   #  python3 ./mmi_mbr_decode.py
