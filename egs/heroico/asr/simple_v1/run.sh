@@ -88,7 +88,7 @@ if [ $stage -le 6 ]; then
 fi
 
 if [ $stage -le 7 ]; then
-  python3 ./prepare.py
+  python ./prepare.py
 fi
 
 if [ $stage -le 8 ]; then
