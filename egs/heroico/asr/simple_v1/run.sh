@@ -59,6 +59,7 @@ if [ $stage -le 5 ]; then
 fi
 
 if [ $stage -le 6 ]; then
+  gunzip data/local/lm/trigram.arpa.gz
   # Build G
   python -m kaldilm \
     --read-symbol-table="data/lang/words.txt" \
@@ -66,17 +67,17 @@ if [ $stage -le 6 ]; then
     --max-order=1 \
     data/local/lm/trigram.arpa >data/lang/G_uni.fst.txt
 
-  python3 -m kaldilm \
-    --read-symbol-table="data/lang_nosp/words.txt" \
+  python -m kaldilm \
+    --read-symbol-table="data/lang/words.txt" \
     --disambig-symbol='#0' \
     --max-order=3 \
-    data/local/lm/lm_tgmed.arpa >data/lang_nosp/G.fst.txt
+    data/local/lm/trigram.arpa >data/lang/G.fst.txt
 
-  python3 -m kaldilm \
-    --read-symbol-table="data/lang_nosp/words.txt" \
+  python -m kaldilm \
+    --read-symbol-table="data/lang/words.txt" \
     --disambig-symbol='#0' \
     --max-order=4 \
-    data/local/lm/lm_fglarge.arpa >data/lang_nosp/G_4_gram.fst.txt
+    data/local/lm/trigram.arpa >data/lang/G_4_gram.fst.txt
 
   echo ""
   echo "To load G:"
