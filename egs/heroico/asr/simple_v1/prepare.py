@@ -123,7 +123,7 @@ def main():
                 executor=ex,
                 storage_type=LilcomHdf5Writer
             )
-            librispeech_manifests[partition]['cuts'] = cut_set
+            heroico_manifests[partition]['cuts'] = cut_set
             cut_set.to_json(output_dir / f'cuts_{partition}.json.gz')
         # Now onto Musan
         if not musan_cuts_path.is_file():
