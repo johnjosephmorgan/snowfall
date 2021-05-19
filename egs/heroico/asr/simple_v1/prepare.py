@@ -104,7 +104,7 @@ def main():
     print('Feature extraction:')
     extractor = Fbank(FbankConfig(num_mel_bins=80))
     with get_executor() as ex:  # Initialize the executor only once.
-        for partition, manifests in librispeech_manifests.items():
+        for partition, manifests in heroico_manifests.items():
             if (output_dir / f'cuts_{partition}.json.gz').is_file():
                 print(f'{partition} already exists - skipping.')
                 continue
