@@ -90,7 +90,6 @@ def main():
         speech_dir=corpus_dir,
         transcript_dir=dataset_parts,
         output_dir=output_dir,
-        num_jobs=args.num_jobs
     )
 
     print('Musan manifest preparation:')
