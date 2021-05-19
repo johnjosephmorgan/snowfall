@@ -88,7 +88,7 @@ def main():
     print('LibriSpeech manifest preparation:')
     heroico_manifests = prepare_heroico(
         speech_dir=corpus_dir,
-        dataset_parts=dataset_parts,
+        transcript_dir=dataset_parts,
         output_dir=output_dir,
         num_jobs=args.num_jobs
     )
