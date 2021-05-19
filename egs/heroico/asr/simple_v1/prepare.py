@@ -73,7 +73,7 @@ def get_parser():
 
 def main():
     args = get_parser().parse_args()
-    dataset_parts = ('dev', 'dev-other', 'test-clean', 'test-other', 'train-clean-100')
+    dataset_parts = ('dev', 'devtest', 'test', 'train')
 
     print("Parts we will prepare: ", dataset_parts)
 
