@@ -67,35 +67,21 @@ def get_parser():
         '--num-jobs',
         type=int,
         default=min(15, os.cpu_count()),
-        help='When enabled, use 960h LibriSpeech.')
-    parser.add_argument(
-        '--full-libri',
-        type=str2bool,
-        default=False,
-        help='When enabled, use 960h LibriSpeech.')
+        help='No help yet.')
     return parser
 
 
 def main():
     args = get_parser().parse_args()
-    if args.full_libri:
-        dataset_parts = ('dev-clean', 'dev-other', 'test-clean', 'test-other',
-                         'train-clean-100', 'train-clean-360', 'train-other-500')
-    else:
-        dataset_parts = ('dev-clean', 'dev-other', 'test-clean', 'test-other', 'train-clean-100')
+    dataset_parts = ('dev', 'dev-other', 'test-clean', 'test-other', 'train-clean-100')
 
     print("Parts we will prepare: ", dataset_parts)
 
     corpus_dir = locate_corpus(
         Path('/mnt/corpora/LDC2006S37'),
-        Path('/home/storage04/zhuangweiji/data/open-source-data/librispeech/LibriSpeech'),
-        Path('/root/fangjun/data/librispeech/LibriSpeech'),
-        Path('/export/common/data/corpora/ASR/openslr/SLR12/LibriSpeech')
     )
     musan_dir = locate_corpus(
         Path('/mnt/corpora/musan'),
-        Path('/export/common/data/corpora/MUSAN/musan'),
-        Path('/root/fangjun/data/musan'),
     )
 
     output_dir = Path('exp/data')
