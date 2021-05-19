@@ -78,7 +78,7 @@ def main():
     print("Parts we will prepare: ", dataset_parts)
 
     corpus_dir = locate_corpus(
-        Path('/mnt/corpora/LDC2006S37'),
+        Path('/mnt/corpora/LDC2006S37/data'),
     )
     musan_dir = locate_corpus(
         Path('/mnt/corpora/musan'),
@@ -86,10 +86,10 @@ def main():
 
     output_dir = Path('exp/data')
     print('Heroico manifest preparation:')
-    train_dir = Path.joinpath( corpus_dir, dataset_parts[2] )
+    transcripts_dir = Path.joinpath( corpus_dir, 'transcripts' )
     heroico_manifests = prepare_heroico(
         speech_dir=corpus_dir,
-        transcript_dir=train_dir,
+        transcript_dir=transcripts_dir,
         output_dir=output_dir,
     )
 
