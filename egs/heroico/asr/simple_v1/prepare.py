@@ -88,7 +88,7 @@ def main():
     print('Heroico manifest preparation:')
     heroico_manifests = prepare_heroico(
         speech_dir=corpus_dir,
-        transcript_dir=dataset_parts,
+        transcript_dir=dataset_parts['train'],
         output_dir=output_dir,
     )
 
