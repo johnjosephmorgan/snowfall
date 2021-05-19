@@ -11,7 +11,7 @@ from pathlib import Path
 
 import torch
 from lhotse import CutSet, Fbank, FbankConfig, LilcomHdf5Writer, combine
-from lhotse.recipes import prepare_heroico, prepare_musan
+from lhotse.recipes import prepare_heroico
 
 from snowfall.common import str2bool
 
@@ -80,9 +80,6 @@ def main():
     corpus_dir = locate_corpus(
         Path('/mnt/corpora/LDC2006S37/data'),
     )
-    musan_dir = locate_corpus(
-        Path('/mnt/corpora/musan'),
-    )
 
     output_dir = Path('exp/data')
     print('Heroico manifest preparation:')
@@ -91,14 +88,6 @@ def main():
         speech_dir=corpus_dir,
         transcript_dir=transcripts_dir,
         output_dir=output_dir,
-    )
-
-    print('Musan manifest preparation:')
-    musan_cuts_path = output_dir / 'cuts_musan.json.gz'
-    musan_manifests = prepare_musan(
-        corpus_dir=musan_dir,
-        output_dir=output_dir,
-        parts=('music', 'speech', 'noise')
     )
 
     print('Feature extraction:')
@@ -125,20 +114,6 @@ def main():
             )
             heroico_manifests[partition]['cuts'] = cut_set
             cut_set.to_json(output_dir / f'cuts_{partition}.json.gz')
-        # Now onto Musan
-        if not musan_cuts_path.is_file():
-            print('Extracting features for Musan')
-            # create chunks of Musan with duration 5 - 10 seconds
-            musan_cuts = CutSet.from_manifests(
-                recordings=combine(part['recordings'] for part in musan_manifests.values())
-            ).cut_into_windows(10.0).filter(lambda c: c.duration > 5).compute_and_store_features(
-                extractor=extractor,
-                storage_path=f'{output_dir}/feats_musan',
-                num_jobs=args.num_jobs if ex is None else 80,
-                executor=ex,
-                storage_type=LilcomHdf5Writer
-            )
-            musan_cuts.to_json(musan_cuts_path)
 
 
 if __name__ == '__main__':
