@@ -86,9 +86,10 @@ def main():
 
     output_dir = Path('exp/data')
     print('Heroico manifest preparation:')
+    train_dir = Path.joinpath( corpus_dir, dataset_parts[2] )
     heroico_manifests = prepare_heroico(
         speech_dir=corpus_dir,
-        transcript_dir=dataset_parts[2],
+        transcript_dir=train_dir,
         output_dir=output_dir,
     )
 
