@@ -254,9 +254,9 @@ def main():
     feature_dir = Path('exp/data')
     logging.info("About to get train cuts")
     cuts_train = CutSet.from_json(feature_dir /
-                                  'cuts_train-clean-100.json.gz')
+                                  'cuts_train.json.gz')
     logging.info("About to get dev cuts")
-    cuts_dev = CutSet.from_json(feature_dir / 'cuts_dev-clean.json.gz')
+    cuts_dev = CutSet.from_json(feature_dir / 'cuts_devtest.json.gz')
     logging.info("About to get Musan cuts")
     cuts_musan = CutSet.from_json(feature_dir / 'cuts_musan.json.gz')
 
