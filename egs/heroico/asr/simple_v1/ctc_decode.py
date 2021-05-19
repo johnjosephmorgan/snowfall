@@ -123,7 +123,7 @@ def main():
     # load dataset
     feature_dir = Path('exp/data')
     print("About to get test cuts")
-    cuts_test = CutSet.from_json(feature_dir / 'cuts_test-clean.json.gz')
+    cuts_test = CutSet.from_json(feature_dir / 'cuts_test.json.gz')
 
     print("About to create test dataset")
     test = K2SpeechRecognitionDataset(cuts_test)
