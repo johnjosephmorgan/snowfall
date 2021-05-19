@@ -225,7 +225,7 @@ def main():
     start_epoch = 0
     num_epochs = 8
 
-    exp_dir = 'exp-lstm-adam-ctc-musan'
+    exp_dir = 'exp-lstm-adam-ctc'
     setup_logger('{}/log/log-train'.format(exp_dir))
     tb_writer = SummaryWriter(log_dir=f'{exp_dir}/tensorboard')
 
@@ -257,20 +257,10 @@ def main():
                                   'cuts_train.json.gz')
     logging.info("About to get dev cuts")
     cuts_dev = CutSet.from_json(feature_dir / 'cuts_devtest.json.gz')
-    logging.info("About to get Musan cuts")
-    cuts_musan = CutSet.from_json(feature_dir / 'cuts_musan.json.gz')
 
     logging.info("About to create train dataset")
     train = K2SpeechRecognitionDataset(
-        cuts_train,
-        cut_transforms=[
-            CutConcatenate(),
-            CutMix(
-                cuts=cuts_musan,
-                prob=0.5,
-                snr=(10, 20)
-            )
-        ]
+        cuts_train
     )
     train_sampler = SingleCutSampler(
         cuts_train,
