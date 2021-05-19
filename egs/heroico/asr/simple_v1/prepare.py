@@ -86,7 +86,7 @@ def main():
 
     output_dir = Path('exp/data')
     print('LibriSpeech manifest preparation:')
-    librispeech_manifests = prepare_librispeech(
+    heroico_manifests = prepare_heroico(
         corpus_dir=corpus_dir,
         dataset_parts=dataset_parts,
         output_dir=output_dir,
