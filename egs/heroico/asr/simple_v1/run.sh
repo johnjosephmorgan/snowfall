@@ -46,7 +46,7 @@ fi
 
 if [ $stage -le 5 ]; then
   mkdir -p $tmpdir/lm
-  python local/json2text.py $tmpdir/lm/text
+  python local/json2text.py > $tmpdir/lm/text
   local/prepare_lm.sh  $tmpdir/lm/text
 fi
 
