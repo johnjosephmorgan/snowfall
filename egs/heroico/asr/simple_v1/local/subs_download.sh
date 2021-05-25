@@ -12,6 +12,7 @@ subs_src=$1
 if [ ! -f $download_dir/subs.zip ]; then
   wget -O $download_dir/subs.zip $subs_src
   (
+    [ ! -f README ] || rm README
     cd $download_dir
     unzip subs.zip
   )
