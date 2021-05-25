@@ -14,7 +14,7 @@ use Encode;
 # set lower and upper bounds
 my $low_bound = 8;
 # only segments with at least  $low_bound words will be written
-my $up_bound = 16;
+my $up_bound = 12;
 # only segments with fewer than $up_bound words will be written
 
 # input and output files

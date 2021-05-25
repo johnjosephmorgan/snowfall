@@ -13,6 +13,8 @@ stage=0
 lexicon_url="http://www.openslr.org/resources/34/santiago.tar.gz"
 datadir=/mnt/corpora/LDC2006S37
 tmpdir=data/local/tmp
+# Location of the Movie subtitles text corpus
+subtitles_url="http://opus.lingfil.uu.se/download.php?f=OpenSubtitles2018/en-es.txt.zip"
 
 if [ $stage -le 1 ]; then
   if [ ! -d $datadir ]; then
@@ -45,9 +47,13 @@ if [ $stage -le 4 ]; then
 fi
 
 if [ $stage -le 5 ]; then
-  mkdir -p $tmpdir/lm
-  python local/json2text.py > $tmpdir/lm/text
-  local/prepare_lm.sh  $tmpdir/lm/text
+  mkdir -p $tmpdir/lm/transcripts
+  python local/json2text.py > $tmpdir/lm/transcripts/text
+  local/subs_download.sh $subtitles_url
+  mkdir -p $tmpdir/subs/lm
+  local/subs_prepare_data.pl
+  cat $tmpdir/subs/lm/in_vocabulary.txt $tmpdir/lm/transcripts/text > data/local/lm/text
+  local/prepare_lm.sh  data/local/lm/text
 fi
 
 if [ $stage -le 6 ]; then
