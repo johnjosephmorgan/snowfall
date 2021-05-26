@@ -78,7 +78,7 @@ def get_parser():
 
 def main():
     args = get_parser().parse_args()
-    if args.full_libri:
+    if args.full_mls:
         dataset_parts = ('dev', 'test', 'train')
     else:
         dataset_parts = ('dev', 'test', 'train')
