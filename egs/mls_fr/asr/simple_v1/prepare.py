@@ -98,7 +98,6 @@ def main():
     print('mls manifest preparation:')
     mls_manifests = prepare_mls(
         corpus_dir=corpus_dir,
-        dataset_parts=dataset_parts,
         output_dir=output_dir,
         num_jobs=args.num_jobs
     )
