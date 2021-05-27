@@ -389,16 +389,16 @@ def main():
     # load dataset
     feature_dir = Path('exp/data')
     logging.info("About to get train cuts")
-    cuts_train = load_manifest(feature_dir / 'cuts_train-clean-100.json.gz')
+    cuts_train = load_manifest(feature_dir / 'cuts_train.json.gz')
     if args.full_mls:
         cuts_train = (
             cuts_train +
-            load_manifest(feature_dir / 'cuts_train-clean-360.json.gz') +
+            load_manifest(feature_dir / 'cuts_train.json.gz') +
             load_manifest(feature_dir / 'cuts_train-other-500.json.gz')
         )
     logging.info("About to get dev cuts")
     cuts_dev = (
-        load_manifest(feature_dir / 'cuts_dev-clean.json.gz') +
+        load_manifest(feature_dir / 'cuts_dev.json.gz') +
         load_manifest(feature_dir / 'cuts_dev-other.json.gz')
     )
     logging.info("About to get Musan cuts")
