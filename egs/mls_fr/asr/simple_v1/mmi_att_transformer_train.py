@@ -31,7 +31,7 @@ from snowfall.common import describe, str2bool
 from snowfall.common import load_checkpoint, save_checkpoint
 from snowfall.common import save_training_info
 from snowfall.common import setup_logger
-from snowfall.data.librispeech import LibriSpeechAsrDataModule
+from snowfall.data.mls import MLSAsrDataModule
 from snowfall.dist import cleanup_dist
 from snowfall.dist import setup_dist
 from snowfall.lexicon import Lexicon
@@ -473,9 +473,9 @@ def run(rank, world_size, args):
     P.scores = torch.zeros_like(P.scores)
     P = P.to(device)
 
-    librispeech = LibriSpeechAsrDataModule(args)
-    train_dl = librispeech.train_dataloaders()
-    valid_dl = librispeech.valid_dataloaders()
+    mls = MLSAsrDataModule(args)
+    train_dl = mls.train_dataloaders()
+    valid_dl = mls.valid_dataloaders()
 
     if not torch.cuda.is_available():
         logging.error('No GPU detected!')
@@ -649,7 +649,7 @@ def run(rank, world_size, args):
 
 def main():
     parser = get_parser()
-    LibriSpeechAsrDataModule.add_arguments(parser)
+    MLSAsrDataModule.add_arguments(parser)
     args = parser.parse_args()
     world_size = args.world_size
     assert world_size >= 1
