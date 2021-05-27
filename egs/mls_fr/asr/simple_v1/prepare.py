@@ -99,6 +99,7 @@ def main():
     mls_manifests = prepare_mls(
         corpus_dir=corpus_dir,
         output_dir=output_dir,
+        opus=False,
         num_jobs=args.num_jobs
     )
 
