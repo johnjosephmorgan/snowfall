@@ -329,10 +329,10 @@ def get_parser():
         help='The amount of padding (in seconds) inserted between concatenated cuts. '
              'This padding is filled with noise when noise augmentation is used.')
     parser.add_argument(
-        '--full-libri',
+        '--full-mls',
         type=str2bool,
         default=False,
-        help='When enabled, use 960h LibriSpeech.')
+        help='When enabled, use 914h mls.')
     parser.add_argument(
         '--on-the-fly-feats',
         type=str2bool,
@@ -390,7 +390,7 @@ def main():
     feature_dir = Path('exp/data')
     logging.info("About to get train cuts")
     cuts_train = load_manifest(feature_dir / 'cuts_train-clean-100.json.gz')
-    if args.full_libri:
+    if args.full_mls:
         cuts_train = (
             cuts_train +
             load_manifest(feature_dir / 'cuts_train-clean-360.json.gz') +
