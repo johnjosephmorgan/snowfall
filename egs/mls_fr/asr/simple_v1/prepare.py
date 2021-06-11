@@ -85,7 +85,8 @@ def main():
         Path('/mnt/corpora/MLS_French')
     )
     musan_dir = locate_corpus(
-        Path('/mnt/corpora/musan')    )
+        Path('/mnt/corpora/musan')
+    )
 
     output_dir = Path('exp/data')
     print('mls manifest preparation:')
