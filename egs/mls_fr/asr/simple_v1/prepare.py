@@ -78,21 +78,14 @@ def get_parser():
 
 def main():
     args = get_parser().parse_args()
-    if args.full_mls:
-        dataset_parts = ('dev', 'test', 'train')
-    else:
-        dataset_parts = ('dev', 'test', 'train')
-
+    dataset_parts = ('dev', 'test', 'train')
     print("Parts we will prepare: ", dataset_parts)
 
     corpus_dir = locate_corpus(
         Path('/mnt/corpora/MLS_French')
     )
     musan_dir = locate_corpus(
-        Path('/mnt/corpora/musan'),
-        Path('/export/common/data/corpora/MUSAN/musan'),
-        Path('/root/fangjun/data/musan'),
-    )
+        Path('/mnt/corpora/musan')    )
 
     output_dir = Path('exp/data')
     print('mls manifest preparation:')
